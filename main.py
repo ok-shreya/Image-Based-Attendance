@@ -13,7 +13,7 @@ import tensorflow as tf
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 tf.get_logger().setLevel('ERROR')
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 app.config['UPLOAD_FOLDER'] = 'images'
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}
@@ -153,5 +153,5 @@ def submit_date():
 
     return render_template('image_upload_page.html')
 
-if _name_ == '_main_':
+if __name__ == '_main_':
     app.run(debug=True)
