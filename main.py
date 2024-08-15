@@ -154,4 +154,5 @@ def submit_date():
     return render_template('image_upload_page.html')
 
 if __name__ == '_main_':
+    print("Running app")
     app.run(debug=True)
