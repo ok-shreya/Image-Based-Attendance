@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+    <link rel="stylesheet" href="styles1.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Attendance</h1>
+        <form action="http://localhost:5000/submit_attendance" method="post" enctype="multipart/form-data">
+            <div>
+                <label for="stream">Select Stream: </label>
+                <select name="stream" id="stream" onchange="updateCourse()">
+                    <option value=1>B.A</option>
+                    <option value=2>B.Sc</option>
+                    <option value=3>B.Com</option>
+                </select>
+            </div>
+            <label for="course">Select Course: </label>
+            <select name="course" id="course"></select>
+            <div>
+                <label for="semester">Select Semester: </label>
+                <select id="semester" name="semester" onchange="updatePaper()">
+                    <option value=1>Semester 1</option>
+                    <option value=2>Semester 2</option>
+                    <option value=3>Semester 3</option>
+                    <option value=4>Semester 4</option>
+                    <option value=5>Semester 5</option>
+                    <option value=6>Semester 6</option>
+                </select>
+            </div> 
+            <div>
+            <label for="paper">Select Paper: </label>
+            <select id="paper" name="paper"></select>
+            </div>
+            <div class="date">
+                <label for="date">Enter Date</label> 
+                <input type="date" name="date" id="">  
+            </div>          
+            
+            <label for="period">Number of Periods: </label>
+            <select name="period" id="period">
+                <option value=2>2</option>
+                <option value=4>4</option>
+            </select>
+            <label for="image">Upload Class Image: </label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+            <br> <br>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    <script>
+        function updatePaper() {
+            var semester = document.getElementById("semester");
+            var paper = document.getElementById("paper");
+            var sem_selected = semester.value;
+            paper.innerHTML = "";
+
+            if (sem_selected === "1") {
+                addOptions(paper, ["CC1", "CC2"]);
+            } else if (sem_selected === "2") {
+                addOptions(paper, ["CC3", "CC4"]);
+            } else if (sem_selected === "3") {
+                addOptions(paper, ["CC5", "CC6", "CC7", "SEC-A"]);
+            } else if (sem_selected === "4") {
+                addOptions(paper, ["CC8", "CC9", "CC10", "SEC-B"]);
+            } else if (sem_selected === "5") {
+                addOptions(paper, ["CC11", "CC12", "DSE-A", "DSE-B"]);
+            } else if (sem_selected === "6") {
+                addOptions(paper, ["CC13", "CC14", "DSE-A", "DSE-B"]);
+            }
+        }
+
+        function updateCourse(){
+            var stream = document.getElementById("stream");
+            var course = document.getElementById("course");
+            var stream_selected = stream.value;
+            course.innerHTML = "";
+            
+            if (stream_selected === "1") {
+                addOptions(course, ["BA General","English Hons", "Bengali Hons", "History Hons", "Journalism and Mass Communication Hons", "Sociology Hons", "Philosophy Hons", "Political Science Hons", "Sanskrit Hons"])
+            }else if (stream_selected === "2"){
+                addOptions(course, ["Computer Science Hons","Mathematics Hons","Chemistry Hons","Physics Hons", "Geography Hons", "Psychology Hons", "Environmental Science Hons"])
+            }else if(stream_selected==="3"){
+                addOptions(course, ["Commerce Hons", "Economics Hons"])
+            }
+        }
+
+        function addOptions(selectElement, options) {
+            options.forEach(function(option) {
+                var optionElement = document.createElement("option");
+                optionElement.textContent = option;
+                optionElement.value = option;
+                selectElement.appendChild(optionElement);
+            });
+        }
+
+        // Initially populate the paper options based on the default semester selection
+        updatePaper();
+        updateCourse();
+    </script>
+
+</body>
+</html>
